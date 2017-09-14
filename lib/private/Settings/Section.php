@@ -35,12 +35,14 @@ class Section implements ISection {
 	/** @var int */
 	protected $priority;
 	protected $icon;
+	protected $url;
 
-	public function __construct($id, $name, $priority, $icon='settings') {
+	public function __construct($id, $name, $priority, $icon='settings', $url=null) {
 		$this->id = $id;
 		$this->name = $name;
 		$this->priority = $priority;
 		$this->icon = $icon;
+		$this->url = $url;
 	}
 
 	public function getID() {
@@ -57,6 +59,10 @@ class Section implements ISection {
 
 	public function getIconName() {
 		return $this->icon;
+	}
+
+	public function getIconUrl() {
+		return \OC_App::getIconFromUrl($this->url, $this->getID());
 	}
 
 }

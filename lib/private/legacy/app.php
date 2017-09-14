@@ -597,6 +597,22 @@ class OC_App {
 		return false;
 	}
 
+	public static function getIconFromUrl($url, $appId) {
+		if ($url === null) {
+			return null;
+		}
+
+		$iconPath = self::getAppPath($appId) . '/img/';
+		$fileAbsolutePath = self::getAppPath($appId)  . '/img/' . end(explode('/', $url));
+		$view = new \OC\Files\View();
+		if (!$view->file_exists($fileAbsolutePath)) {
+			$view->mkdir($iconPath);
+			file_put_contents($fileAbsolutePath, fopen($url, 'r'));
+		}
+		$url = strstr($fileAbsolutePath, \OC::$WEBROOT);
+		return $url;
+	}
+
 
 	/**
 	 * check if an app's directory is writable

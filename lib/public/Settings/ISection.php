@@ -53,4 +53,6 @@ interface ISection {
 	 */
 	public function getIconName();
 
+	public function getIconUrl();
+
 }
